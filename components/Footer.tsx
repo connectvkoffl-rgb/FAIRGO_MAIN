@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { AnimatedElement } from './AnimatedElement';
 import { PhoneIcon } from './icons';
@@ -7,9 +6,17 @@ import logoImage from '../assets/Fairgo_logo_withouticons.png';
 export const Footer: React.FC = () => {
     return (
         <footer className="py-20 px-4 border-t border-gray-800/50">
-            <div className="container mx-auto text-center">
+            <div className="container mx-auto text-center align-items-center">
                 <AnimatedElement variant="scale">
-                    <img src={logoImage} alt="FAIRGO Logo" className="h-6 w-auto" />
+                    {/* FIXED: Added 'mx-auto' (margin-left: auto, margin-right: auto) 
+                      and 'block' to the image's className.
+                      'block' is necessary for 'mx-auto' to work on an image.
+                    */}
+                    <img 
+                        src={logoImage} 
+                        alt="FAIRGO Logo" 
+                        className="h-20 mb-4 w-auto block mx-auto" 
+                    />
                 </AnimatedElement>
                 <AnimatedElement delay={100}>
                     <p className="text-gray-400 mb-8 max-w-md mx-auto">Advanced AI solutions, designed for future-focused teams and innovators.</p>
