@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { AnimatedElement } from './AnimatedElement';
 
@@ -79,14 +78,14 @@ export const Services: React.FC = () => {
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-8">
-                    <AnimatedElement delay={300} variant="left">
+                    <AnimatedElement delay={200} variant="left">
                         <CornerBox>
                             <img src="https://picsum.photos/seed/service1/500/300" alt="Repetitive Tasks" className="rounded-lg mb-6 opacity-40" />
                             <h3 className="text-2xl font-semibold text-white mb-2">Automate Repetitive Tasks</h3>
                             <p className="text-gray-400">Eliminate busywork and let AI handle the routine so your team can focus on what matters.</p>
                         </CornerBox>
                     </AnimatedElement>
-                    <AnimatedElement delay={400} variant="right">
+                    <AnimatedElement delay={350} variant="right">
                         <div ref={codeBoxRef}>
                             <CornerBox>
                                 <div className="bg-black rounded-lg p-4 font-mono text-sm text-green-400 h-[252px] overflow-hidden opacity-80">
@@ -102,14 +101,14 @@ export const Services: React.FC = () => {
                             </CornerBox>
                         </div>
                     </AnimatedElement>
-                    <AnimatedElement delay={300} variant="left">
+                    <AnimatedElement delay={400} variant="left">
                         <CornerBox>
                             <img src="https://picsum.photos/seed/service3/500/300" alt="Consultancy" className="rounded-lg mb-6 opacity-40" />
                             <h3 className="text-2xl font-semibold text-white mb-2">AI Consultancy Services</h3>
                             <p className="text-gray-400">Expert guidance to align technology with your business goals.</p>
                         </CornerBox>
                     </AnimatedElement>
-                    <AnimatedElement delay={400} variant="right">
+                    <AnimatedElement delay={550} variant="right">
                         <CornerBox>
                              <img src="https://picsum.photos/seed/service4/500/300" alt="Workflows" className="rounded-lg mb-6 opacity-40" />
                             <h3 className="text-2xl font-semibold text-white mb-2">Automated Workflows</h3>

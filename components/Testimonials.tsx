@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { AnimatedElement } from './AnimatedElement';
 
@@ -72,7 +71,7 @@ export const Testimonials: React.FC = () => {
                 </div>
                 <div className="space-y-24">
                     {testimonials.map((t, i) => (
-                        <AnimatedElement key={i} variant={i % 2 === 0 ? 'left' : 'right'}>
+                        <AnimatedElement key={i} delay={i * 250} variant={i % 2 === 0 ? 'left' : 'right'}>
                             <TestimonialCard testimonial={t} reverse={i % 2 !== 0} />
                         </AnimatedElement>
                     ))}
