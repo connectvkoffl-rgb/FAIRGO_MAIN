@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { PlusIcon, MinusIcon, BookOpenIcon } from './icons';
+import { PlusIcon, MinusIcon, PhoneIcon } from './icons';
 import { AnimatedElement } from './AnimatedElement';
 
 const faqData = [
@@ -53,7 +53,7 @@ export const Faq: React.FC = () => {
                     <AnimatedElement delay={200} variant="left"><p className="text-lg text-gray-400 mb-8">Need help? Find fast answers to common questions, from setup to strategy to automation success.</p></AnimatedElement>
                     <AnimatedElement delay={300} variant="left">
                          <button className="flex items-center gap-2 bg-white text-black px-6 py-3 rounded-md font-semibold transition-all duration-300 transform hover:scale-105 hover:-translate-y-1">
-                            <BookOpenIcon className="w-5 h-5" />
+                            <PhoneIcon className="w-5 h-5" />
                             Book A Call
                         </button>
                     </AnimatedElement>

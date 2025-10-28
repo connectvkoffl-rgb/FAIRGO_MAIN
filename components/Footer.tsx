@@ -1,5 +1,7 @@
+
 import React from 'react';
 import { AnimatedElement } from './AnimatedElement';
+import { PhoneIcon } from './icons';
 
 const GlitchText: React.FC<{ children: React.ReactNode }> = ({ children }) => (
     <div className="relative inline-block glitch-text">
@@ -20,7 +22,8 @@ export const Footer: React.FC = () => {
                     <p className="text-gray-400 mb-8 max-w-md mx-auto">Advanced AI solutions, designed for future-focused teams and innovators.</p>
                 </AnimatedElement>
                 <AnimatedElement delay={200}>
-                    <button className="border border-gray-600 text-white px-6 py-3 rounded-md font-semibold transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 hover:bg-white hover:text-black">
+                    <button className="inline-flex items-center gap-2 border border-gray-600 text-white px-6 py-3 rounded-md font-semibold transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 hover:bg-white hover:text-black">
+                        <PhoneIcon className="w-5 h-5" />
                         Book A Free Call
                     </button>
                 </AnimatedElement>

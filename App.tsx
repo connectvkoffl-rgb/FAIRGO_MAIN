@@ -8,8 +8,6 @@ import { Features } from './components/Features';
 import { Process } from './components/Process';
 import { Projects } from './components/Projects';
 import { Achievements } from './components/Achievements';
-import { ImageGenerator } from './components/ImageGenerator';
-import { VideoGenerator } from './components/VideoGenerator';
 import { Campaigns } from './components/Campaigns';
 import { Comparison } from './components/Comparison';
 import { Testimonials } from './components/Testimonials';
@@ -31,8 +29,6 @@ const App: React.FC = () => {
           <Process />
           <Projects />
           <Achievements />
-          <ImageGenerator />
-          <VideoGenerator />
           <Campaigns />
           <Comparison />
           <Testimonials />
