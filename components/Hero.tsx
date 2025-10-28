@@ -2,6 +2,7 @@
 import React from 'react';
 import { BookOpenIcon, CodeIcon } from './icons';
 import { AnimatedElement } from './AnimatedElement';
+import { PulsingCircles } from './PulsingCircles';
 
 const GlitchText: React.FC<{ children: string }> = ({ children }) => {
     return (
@@ -30,7 +31,8 @@ export const Hero: React.FC = () => {
                 </div>
             </AnimatedElement>
             <AnimatedElement delay={100} variant="scale">
-                <div className="flex justify-center mb-8">
+                <div className="relative flex justify-center mb-8">
+                     <PulsingCircles />
                      <GlitchText>FAIRGO</GlitchText>
                 </div>
             </AnimatedElement>
