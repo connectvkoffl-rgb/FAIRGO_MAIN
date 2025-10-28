@@ -1,6 +1,8 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { generateVideo } from '../services/geminiService';
 import { FilmIcon, UploadIcon } from './icons';
+import { AnimatedElement } from './AnimatedElement';
 
 // FIX: The original 'declare global' for 'window.aistudio' used an inline object type.
 // The error message "Property 'aistudio' must be of type 'AIStudio'" indicates
@@ -75,6 +77,7 @@ export const VideoGenerator: React.FC = () => {
                 const base64String = (reader.result as string).split(',')[1];
                 setImageBase64(base64String);
             };
+            // FIX: Corrected typo from readDataURL to readAsDataURL.
             reader.readAsDataURL(file);
         }
     };
@@ -218,13 +221,15 @@ export const VideoGenerator: React.FC = () => {
         <section className="py-20 px-4">
             <div className="container mx-auto">
                 <div className="text-center mb-12">
-                    <SectionTitle>AI Video Studio</SectionTitle>
-                    <h2 className="text-4xl md:text-5xl font-bold text-white">Bring Your Images to Life</h2>
-                    <p className="mt-4 text-lg text-gray-400 max-w-2xl mx-auto">Upload a starting image and watch as our AI transforms it into a dynamic video clip.</p>
+                    <AnimatedElement variant="scale"><SectionTitle>AI Video Studio</SectionTitle></AnimatedElement>
+                    <AnimatedElement delay={100} variant="scale"><h2 className="text-4xl md:text-5xl font-bold text-white">Bring Your Images to Life</h2></AnimatedElement>
+                    <AnimatedElement delay={200}><p className="mt-4 text-lg text-gray-400 max-w-2xl mx-auto">Upload a starting image and watch as our AI transforms it into a dynamic video clip.</p></AnimatedElement>
                 </div>
 
                 <div className="max-w-4xl mx-auto">
-                   {renderContent()}
+                    <AnimatedElement delay={300} variant="scale">
+                        {renderContent()}
+                    </AnimatedElement>
                 </div>
             </div>
         </section>

@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { ChevronLeftIcon, ChevronRightIcon } from './icons';
+import { AnimatedElement } from './AnimatedElement';
 
 const SectionTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => (
     <div className="inline-block px-4 py-1 border border-gray-700 rounded-full text-sm bg-gray-900/50 mb-4">
@@ -60,31 +61,37 @@ export const Campaigns: React.FC = () => {
         <section className="py-20 px-4">
             <div className="container mx-auto">
                 <div className="text-center mb-12">
-                    <SectionTitle>Campaigns</SectionTitle>
-                    <h2 className="text-4xl md:text-5xl font-bold text-white">Campaigns That Convert</h2>
-                    <p className="mt-4 text-lg text-gray-400">We combine data, AI, and automation to deliver campaigns that convert</p>
+                    <AnimatedElement variant="scale"><SectionTitle>Campaigns</SectionTitle></AnimatedElement>
+                    <AnimatedElement delay={100} variant="scale"><h2 className="text-4xl md:text-5xl font-bold text-white">Campaigns That Convert</h2></AnimatedElement>
+                    <AnimatedElement delay={200}><p className="mt-4 text-lg text-gray-400">We combine data, AI, and automation to deliver campaigns that convert</p></AnimatedElement>
                 </div>
 
                 <div className="relative">
-                    <div className="overflow-hidden relative h-[480px]">
-                        {campaigns.map((campaign, index) => (
-                             <div 
-                                key={index}
-                                className="absolute inset-0 transition-opacity duration-500 ease-in-out"
-                                style={{ opacity: index === currentIndex ? 1 : 0, zIndex: index === currentIndex ? 10 : 1 }}
-                              >
-                                <div className="p-4 h-full">
-                                    <CampaignCard campaign={campaign} />
-                                </div>
-                             </div>
-                        ))}
-                    </div>
-                    <button onClick={prev} className="absolute top-1/2 -left-4 md:-left-8 -translate-y-1/2 bg-gray-800/50 p-2 rounded-full hover:bg-gray-700 z-20">
-                        <ChevronLeftIcon className="w-6 h-6 text-white" />
-                    </button>
-                    <button onClick={next} className="absolute top-1/2 -right-4 md:-right-8 -translate-y-1/2 bg-gray-800/50 p-2 rounded-full hover:bg-gray-700 z-20">
-                        <ChevronRightIcon className="w-6 h-6 text-white" />
-                    </button>
+                    <AnimatedElement delay={300} variant="scale">
+                        <div className="overflow-hidden relative h-[480px]">
+                            {campaigns.map((campaign, index) => (
+                                 <div 
+                                    key={index}
+                                    className="absolute inset-0 transition-opacity duration-500 ease-in-out"
+                                    style={{ opacity: index === currentIndex ? 1 : 0, zIndex: index === currentIndex ? 10 : 1 }}
+                                  >
+                                    <div className="p-4 h-full">
+                                        <CampaignCard campaign={campaign} />
+                                    </div>
+                                 </div>
+                            ))}
+                        </div>
+                    </AnimatedElement>
+                    <AnimatedElement delay={500} variant="left" className="absolute top-1/2 -left-4 md:-left-8 -translate-y-1/2 z-20">
+                        <button onClick={prev} className="bg-gray-800/50 p-2 rounded-full hover:bg-gray-700">
+                            <ChevronLeftIcon className="w-6 h-6 text-white" />
+                        </button>
+                    </AnimatedElement>
+                    <AnimatedElement delay={500} variant="right" className="absolute top-1/2 -right-4 md:-right-8 -translate-y-1/2 z-20">
+                        <button onClick={next} className="bg-gray-800/50 p-2 rounded-full hover:bg-gray-700">
+                            <ChevronRightIcon className="w-6 h-6 text-white" />
+                        </button>
+                    </AnimatedElement>
                 </div>
             </div>
         </section>

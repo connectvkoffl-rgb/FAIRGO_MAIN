@@ -26,23 +26,72 @@
   }
 
   @keyframes fade-in-up {
-    from {
-      opacity: 0;
-      transform: translateY(1rem);
-      filter: blur(4px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-      filter: blur(0);
-    }
+    from { opacity: 0; transform: translateY(1.5rem); filter: blur(4px); }
+    to { opacity: 1; transform: translateY(0); filter: blur(0); }
   }
-  .animate-fade-in-up {
-    animation-name: fade-in-up;
+  @keyframes fade-in-left {
+    from { opacity: 0; transform: translateX(-1.5rem); filter: blur(4px); }
+    to { opacity: 1; transform: translateX(0); filter: blur(0); }
+  }
+  @keyframes fade-in-right {
+    from { opacity: 0; transform: translateX(1.5rem); filter: blur(4px); }
+    to { opacity: 1; transform: translateX(0); filter: blur(0); }
+  }
+  @keyframes scale-in {
+    from { opacity: 0; transform: scale(0.95); filter: blur(4px); }
+    to { opacity: 1; transform: scale(1); filter: blur(0); }
+  }
+  .animate-on-visible {
     animation-duration: 0.8s;
     animation-fill-mode: forwards;
     animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
   }
+  .animate-fade-in-up { animation-name: fade-in-up; }
+  .animate-fade-in-left { animation-name: fade-in-left; }
+  .animate-fade-in-right { animation-name: fade-in-right; }
+  .animate-scale-in { animation-name: scale-in; }
+
+  .hover-glow:hover {
+    box-shadow: 0 0 15px 0 rgba(7, 203, 203, 0.3), 0 0 5px 0 rgba(7, 203, 203, 0.2);
+  }
+
+  .animated-underline {
+    position: relative;
+    text-decoration: none;
+  }
+  .animated-underline::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 1px;
+    bottom: -4px;
+    left: 0;
+    background-color: #22d3ee; /* cyan-400 */
+    transform-origin: bottom right;
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .animated-underline:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+
+  /* 3D Tilt Effect */
+  .perspective-container {
+    perspective: 1000px;
+  }
+  .tilt-card {
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transform-style: preserve-3d;
+  }
+  .perspective-container:hover .tilt-card {
+    transform: rotateY(5deg) rotateX(10deg) scale(1.02);
+  }
+  .perspective-container.reverse:hover .tilt-card {
+     transform: rotateY(-5deg) rotateX(10deg) scale(1.02);
+  }
+
+
 </style>
 </head>
   <body>

@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { PlusIcon, MinusIcon, BookOpenIcon } from './icons';
+import { AnimatedElement } from './AnimatedElement';
 
 const faqData = [
     {
@@ -23,12 +24,12 @@ const faqData = [
 
 const FaqItem: React.FC<{ item: typeof faqData[0], isOpen: boolean, onClick: () => void }> = ({ item, isOpen, onClick }) => (
     <div className="border-b border-gray-800">
-        <button onClick={onClick} className="w-full flex justify-between items-center text-left py-6">
+        <button onClick={onClick} className="w-full flex justify-between items-center text-left py-6 px-2 rounded-md transition-colors hover:bg-gray-800/30">
             <span className="text-lg font-medium text-white">{item.question}</span>
             {isOpen ? <MinusIcon className="w-6 h-6 text-gray-400" /> : <PlusIcon className="w-6 h-6 text-gray-400" />}
         </button>
         <div className={`transition-max-height duration-500 ease-in-out overflow-hidden ${isOpen ? 'max-h-40' : 'max-h-0'}`}>
-            <p className="pb-6 text-gray-400">{item.answer}</p>
+            <p className="pb-6 px-2 text-gray-400">{item.answer}</p>
         </div>
     </div>
 );
@@ -43,24 +44,29 @@ export const Faq: React.FC = () => {
         <section className="py-20 px-4">
             <div className="container mx-auto grid lg:grid-cols-2 gap-12">
                 <div>
-                    <div className="inline-block px-4 py-1 border border-gray-700 rounded-full text-sm bg-gray-900/50 mb-4">
-                        FAQS
-                    </div>
-                    <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Your Questions Answered</h2>
-                    <p className="text-lg text-gray-400 mb-8">Need help? Find fast answers to common questions, from setup to strategy to automation success.</p>
-                     <button className="flex items-center gap-2 bg-white text-black px-6 py-3 rounded-md font-semibold hover:bg-gray-200 transition-colors">
-                        <BookOpenIcon className="w-5 h-5" />
-                        Book A Call
-                    </button>
+                    <AnimatedElement variant="left">
+                        <div className="inline-block px-4 py-1 border border-gray-700 rounded-full text-sm bg-gray-900/50 mb-4">
+                            FAQS
+                        </div>
+                    </AnimatedElement>
+                    <AnimatedElement delay={100} variant="left"><h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Your Questions Answered</h2></AnimatedElement>
+                    <AnimatedElement delay={200} variant="left"><p className="text-lg text-gray-400 mb-8">Need help? Find fast answers to common questions, from setup to strategy to automation success.</p></AnimatedElement>
+                    <AnimatedElement delay={300} variant="left">
+                         <button className="flex items-center gap-2 bg-white text-black px-6 py-3 rounded-md font-semibold transition-all duration-300 transform hover:scale-105 hover:-translate-y-1">
+                            <BookOpenIcon className="w-5 h-5" />
+                            Book A Call
+                        </button>
+                    </AnimatedElement>
                 </div>
                 <div>
                     {faqData.map((item, index) => (
-                        <FaqItem
-                            key={index}
-                            item={item}
-                            isOpen={openIndex === index}
-                            onClick={() => handleToggle(index)}
-                        />
+                        <AnimatedElement key={index} delay={index * 100} variant="right">
+                            <FaqItem
+                                item={item}
+                                isOpen={openIndex === index}
+                                onClick={() => handleToggle(index)}
+                            />
+                        </AnimatedElement>
                     ))}
                 </div>
             </div>
