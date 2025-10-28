@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { AnimatedElement } from './AnimatedElement';
 
@@ -31,7 +30,7 @@ export const Footer: React.FC = () => {
                         <a href="#" key={item} className="animated-underline hover:text-white transition-colors">{item}</a>
                     ))}
                 </div>
-                <p className="mt-8 text-sm text-gray-600">FAIRGO © 2025. Designed by <span className="text-gray-400">Framebase</span></p>
+                <p className="mt-8 text-sm text-gray-600">FAIRGO © 2025.</p>
             </div>
         </footer>
     );

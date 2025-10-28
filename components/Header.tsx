@@ -20,9 +20,6 @@ export const Header: React.FC = () => {
             <a key={item} href="#" className="animated-underline text-gray-400 hover:text-white transition-colors duration-300">{item}</a>
           ))}
         </nav>
-        <a href="#" className="border border-gray-600 text-white px-4 py-2 rounded-md hover:bg-white hover:text-black transition-all duration-300 text-sm transform hover:scale-105 hover:-translate-y-0.5">
-          Get Template
-        </a>
       </div>
     </header>
   );
