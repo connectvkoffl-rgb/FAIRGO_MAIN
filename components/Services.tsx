@@ -114,7 +114,7 @@ export const Services: React.FC = () => {
                     </AnimatedElement>
                     <AnimatedElement delay={400} variant="left">
                         <CornerBox>
-                            <img src="../assets/ai_brain.gif" alt="Consultancy" className="rounded-lg mb-6 opacity-40" />
+                            <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExd2NyZzYybGk5emFqYjcyZHpwcnR0a3ZrOXQybWhhNGFrMWtpMGpyeiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/CVtNe84hhYF9u/giphy.gif" alt="Consultancy" className="rounded-lg mb-6 opacity-40" />
                             <h3 className="text-2xl font-semibold text-white mb-2">AI Consultancy Services</h3>
                             <p className="text-gray-400">Expert guidance to align technology with your business goals.</p>
                         </CornerBox>
