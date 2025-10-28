@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { AnimatedElement } from './AnimatedElement';
+import { ChevronLeftIcon, ChevronRightIcon } from './icons';
 
 const SectionTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => (
     <div className="inline-block px-4 py-1 border border-gray-700 rounded-full text-sm bg-gray-900/50 mb-4">
@@ -61,6 +62,21 @@ const TestimonialCard: React.FC<{ testimonial: typeof testimonials[0], reverse?:
 );
 
 export const Testimonials: React.FC = () => {
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    const nextSlide = useCallback(() => {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
+    }, []);
+
+    const prevSlide = () => {
+        setCurrentIndex((prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length);
+    };
+
+    useEffect(() => {
+        const slideInterval = setInterval(nextSlide, 5000); // Auto-slide every 5 seconds
+        return () => clearInterval(slideInterval);
+    }, [nextSlide]);
+
     return (
         <section className="py-20 px-4">
             <div className="container mx-auto">
@@ -69,13 +85,49 @@ export const Testimonials: React.FC = () => {
                     <AnimatedElement delay={100}><h2 className="text-4xl md:text-5xl font-bold text-white">What Our Clients Say</h2></AnimatedElement>
                     <AnimatedElement delay={200}><p className="mt-4 text-lg text-gray-400">Join customers who trust AI to transform their business</p></AnimatedElement>
                 </div>
-                <div className="space-y-24">
-                    {testimonials.map((t, i) => (
-                        <AnimatedElement key={i} delay={i * 250} variant={i % 2 === 0 ? 'left' : 'right'}>
-                            <TestimonialCard testimonial={t} reverse={i % 2 !== 0} />
-                        </AnimatedElement>
-                    ))}
-                </div>
+                
+                <AnimatedElement delay={300} variant="scale">
+                    <div className="relative">
+                        <div className="overflow-hidden">
+                            <div
+                                className="flex transition-transform duration-700 ease-in-out"
+                                style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+                            >
+                                {testimonials.map((testimonial, index) => (
+                                    <div key={index} className="w-full flex-shrink-0 px-2 md:px-4">
+                                        <TestimonialCard testimonial={testimonial} reverse={index % 2 !== 0} />
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        <button 
+                            onClick={prevSlide}
+                            className="absolute top-1/2 -left-4 md:-left-8 -translate-y-1/2 z-20 bg-gray-800/50 p-2 rounded-full hover:bg-gray-700 transition-colors"
+                            aria-label="Previous testimonial"
+                        >
+                            <ChevronLeftIcon className="w-6 h-6 text-white" />
+                        </button>
+                        <button 
+                            onClick={nextSlide}
+                            className="absolute top-1/2 -right-4 md:-right-8 -translate-y-1/2 z-20 bg-gray-800/50 p-2 rounded-full hover:bg-gray-700 transition-colors"
+                            aria-label="Next testimonial"
+                        >
+                            <ChevronRightIcon className="w-6 h-6 text-white" />
+                        </button>
+
+                        <div className="flex justify-center mt-8 space-x-3">
+                            {testimonials.map((_, index) => (
+                                <button
+                                    key={index}
+                                    onClick={() => setCurrentIndex(index)}
+                                    className={`w-3 h-3 rounded-full transition-colors ${currentIndex === index ? 'bg-cyan-400' : 'bg-gray-600 hover:bg-gray-400'}`}
+                                    aria-label={`Go to testimonial ${index + 1}`}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                </AnimatedElement>
             </div>
         </section>
     );

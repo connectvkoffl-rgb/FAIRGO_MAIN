@@ -17,11 +17,22 @@ const SectionTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => 
     </div>
 );
 
-const codeSnippet = `function processNumbers(numbers) {
-  for (let i = 0; i < numbers.length; i++) {
-    // AI logic processing...
-  }
-}`;
+const codeSnippet = `// Initialize FAIRGO Agent
+const agent = new FairgoAgent({
+  apiKey: 'YOUR_API_KEY',
+  agentId: 'sales-inquiry-agent-v2'
+});
+
+// Define agent's integration points
+agent.integrate('crm.salesforce');
+agent.integrate('support.zendesk');
+
+// Execute with complex user intent
+agent.execute({
+  query: 'I need to check order status and log a support ticket.',
+  sessionId: 'user-xyz-123',
+  context: { orderId: 'ORD-5678' }
+});`;
 
 export const Services: React.FC = () => {
     const [animatedCode, setAnimatedCode] = useState('');
@@ -80,7 +91,7 @@ export const Services: React.FC = () => {
                 <div className="grid md:grid-cols-2 gap-8">
                     <AnimatedElement delay={200} variant="left">
                         <CornerBox>
-                            <img src="https://picsum.photos/seed/service1/500/300" alt="Repetitive Tasks" className="rounded-lg mb-6 opacity-40" />
+                            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExczRnaHhhbzd5cGdncDNscW45OWR5OHI3YWQ4enZ2cHVmd3JjZXQ1aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/2yvB6nztgzm5a/giphy.gif" alt="Animation of an AI bot emerging from a mobile phone screen" className="rounded-lg mb-6 opacity-60 h-[252px] w-full object-contain" />
                             <h3 className="text-2xl font-semibold text-white mb-2">Automate Repetitive Tasks</h3>
                             <p className="text-gray-400">Eliminate busywork and let AI handle the routine so your team can focus on what matters.</p>
                         </CornerBox>
