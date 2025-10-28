@@ -1,5 +1,4 @@
-
-export interface Message {
-  sender: 'user' | 'bot';
-  text: string;
+declare module "*.png" {
+  const value: any;
+  export default value;
 }
