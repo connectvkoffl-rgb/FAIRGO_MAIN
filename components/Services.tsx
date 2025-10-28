@@ -91,7 +91,7 @@ export const Services: React.FC = () => {
                 <div className="grid md:grid-cols-2 gap-8">
                     <AnimatedElement delay={200} variant="left">
                         <CornerBox>
-                            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExczRnaHhhbzd5cGdncDNscW45OWR5OHI3YWQ4enZ2cHVmd3JjZXQ1aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/2yvB6nztgzm5a/giphy.gif" alt="Animation of an AI bot emerging from a mobile phone screen" className="rounded-lg mb-6 opacity-60 h-[252px] w-full object-contain" />
+                            <img src="../assets/ai.gif" alt="Animation of an AI bot emerging from a mobile phone screen" className="rounded-lg mb-6 opacity-60 h-[252px] w-full object-contain" />
                             <h3 className="text-2xl font-semibold text-white mb-2">Automate Repetitive Tasks</h3>
                             <p className="text-gray-400">Eliminate busywork and let AI handle the routine so your team can focus on what matters.</p>
                         </CornerBox>
@@ -114,14 +114,14 @@ export const Services: React.FC = () => {
                     </AnimatedElement>
                     <AnimatedElement delay={400} variant="left">
                         <CornerBox>
-                            <img src="https://picsum.photos/seed/service3/500/300" alt="Consultancy" className="rounded-lg mb-6 opacity-40" />
+                            <img src="../assets/ai_brain.gif" alt="Consultancy" className="rounded-lg mb-6 opacity-40" />
                             <h3 className="text-2xl font-semibold text-white mb-2">AI Consultancy Services</h3>
                             <p className="text-gray-400">Expert guidance to align technology with your business goals.</p>
                         </CornerBox>
                     </AnimatedElement>
                     <AnimatedElement delay={550} variant="right">
                         <CornerBox>
-                             <img src="https://picsum.photos/seed/service4/500/300" alt="Workflows" className="rounded-lg mb-6 opacity-40" />
+                             <img src="../assets/soundwave.gif" alt="Workflows" className="rounded-lg mb-6 opacity-40" />
                             <h3 className="text-2xl font-semibold text-white mb-2">Automated Workflows</h3>
                             <p className="text-gray-400">Design and deploy intelligent systems that operate consistently with zero human oversight.</p>
                         </CornerBox>
