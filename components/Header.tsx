@@ -36,7 +36,7 @@ export const Header: React.FC = () => {
       <div className={`fixed inset-0 bg-[#01010c]/90 backdrop-blur-md z-[100] md:hidden flex flex-col transition-all duration-300 ease-in-out ${isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}`}>
         <div className="container mx-auto px-4">
             <div className="flex justify-between items-center py-3 border-b border-gray-800/50">
-                <img src="../assets/Fairgo_logo.png" alt="FAIRGO Logo" className="h-8 w-auto" />
+                <img src="https://i.ibb.co/8gH1SvD6/Fairgo-logo.png" alt="FAIRGO Logo" className="h-8 w-auto" />
                 <button
                     onClick={() => setIsMenuOpen(false)}
                     className="text-gray-300 hover:text-white"
