@@ -104,22 +104,6 @@ export const Projects: React.FC = () => {
                         </div>
                     </AnimatedElement>
                 </div>
-
-                <div className="mt-20 grid grid-cols-2 md:grid-cols-5 gap-8 items-center text-center">
-                    <AnimatedElement className="col-span-2 md:col-span-3 flex justify-center md:justify-start items-center gap-10 grayscale opacity-50">
-                        {['Asterisk', 'Eooks', 'Opal'].map((logo, i) => (
-                             <span key={logo} className="text-2xl font-semibold transition-all duration-300 transform hover:opacity-100 hover:scale-110">{logo}</span>
-                        ))}
-                    </AnimatedElement>
-                    <AnimatedElement delay={100} className="border-l border-gray-800 px-4">
-                        <p className="text-4xl font-bold text-white">95%</p>
-                        <p className="text-gray-500">Client Satisfaction</p>
-                    </AnimatedElement>
-                    <AnimatedElement delay={200} className="border-l border-gray-800 px-4">
-                        <p className="text-4xl font-bold text-white">10+</p>
-                        <p className="text-gray-500">Years of Experience</p>
-                    </AnimatedElement>
-                </div>
             </div>
         </section>
     );
