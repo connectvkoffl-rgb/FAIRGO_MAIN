@@ -49,7 +49,7 @@ export const Hero: React.FC = () => {
     <section className="py-24 md:py-32 text-center relative overflow-hidden">
         <div className="container mx-auto px-4 z-10">
             <AnimatedElement>
-                <div className="inline-block px-4 py-1 border border-gray-700 rounded-full text-sm bg-gray-900/50 mb-6">
+                <div className="inline-block px-4 py-1 border border-gray-700 rounded-full text-sm bg-gray-900/50 mb-8">
                     Introducing World's First AI Calling Technology
                 </div>
             </AnimatedElement>
