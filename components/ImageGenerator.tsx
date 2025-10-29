@@ -10,7 +10,33 @@ const SectionTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => 
     </div>
 );
 
+
+
 export const ImageGenerator: React.FC = () => {
+    const [prompt, setPrompt] = useState<string>('');
+    const [imageUrl, setImageUrl] = useState<string>('');
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [error, setError] = useState<string>('');
+
+    const handleGenerate = async () => {
+        if (!prompt) {
+            setError('Please enter a prompt.');
+            return;
+        }
+        setIsLoading(true);
+        setError('');
+        setImageUrl('');
+        try {
+            const url = await generateImage(prompt);
+            setImageUrl(url);
+        } catch (err) {
+            setError('Failed to generate image. Please try again later.');
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    export const ImageGenerator: React.FC = () => {
     const [prompt, setPrompt] = useState<string>('');
     const [imageUrl, setImageUrl] = useState<string>('');
     const [isLoading, setIsLoading] = useState<boolean>(false);
