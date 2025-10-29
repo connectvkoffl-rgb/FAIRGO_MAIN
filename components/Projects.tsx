@@ -8,7 +8,7 @@ const SectionTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => 
     </div>
 );
 
-const ProjectItem: React.FC<{ name: string, year: number }> = ({ name, year }) => (
+const ProjectItem: React.FC<{ name: string, year: string | number }> = ({ name, year }) => (
     <div className="flex justify-between items-center py-4 border-b border-gray-800 transition-all duration-300 transform hover:bg-gray-800/50 hover:px-4 hover:translate-x-2">
         <span className="text-white font-medium">{name}</span>
         <span className="text-gray-500">{year}</span>
@@ -16,9 +16,9 @@ const ProjectItem: React.FC<{ name: string, year: number }> = ({ name, year }) =
 );
 
 const projects = [
-    { name: "ElevenLabs", year: 2025 },
-    { name: "MedAssist AI", year: 2024 },
-    { name: "AutoTag Pro", year: 2023 },
+    { name: "Verben AI", year: "July" },
+    { name: "Waxon Services", year: "August" },
+    { name: "365CNX", year: "October" },
 ];
 
 export const Projects: React.FC = () => {
@@ -28,7 +28,7 @@ export const Projects: React.FC = () => {
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
                     <div>
                         <AnimatedElement variant="left"><SectionTitle>Projects</SectionTitle></AnimatedElement>
-                        <AnimatedElement delay={100} variant="left"><h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Our Latest Projects</h2></AnimatedElement>
+                        <AnimatedElement delay={100} variant="left"><h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Our Latest Collaborations</h2></AnimatedElement>
                         <AnimatedElement delay={200} variant="left"><p className="text-lg text-gray-400 mb-8">See how we turn bold ideas into automated AI solutions carefully crafted to optimize, scale, and deliver measurable results.</p></AnimatedElement>
                         
                         <div className="space-y-2">
