@@ -16,7 +16,7 @@ export const Header: React.FC = () => {
     <>
       <header className="sticky top-0 z-50 py-3 px-4 md:px-8 bg-[#01010c]/80 backdrop-blur-sm border-b border-gray-800/50">
         <div className="container mx-auto flex justify-between items-center">
-          <img src="/assets/Fairgo_logo.png" alt="FAIRGO Logo" className="h-10 w-auto" />
+          <img src="/assets/Fairgo_logo.png" alt="FAIRGO Logo" className="h-8 w-auto" />
           <nav className="hidden md:flex items-center space-x-8">
             {navLinks.map((item) => (
               <a key={item} href="#" className="animated-underline text-gray-400 hover:text-white transition-colors duration-300">{item}</a>
@@ -36,7 +36,7 @@ export const Header: React.FC = () => {
       <div className={`fixed inset-0 bg-[#01010c]/90 backdrop-blur-md z-[100] md:hidden flex flex-col transition-all duration-300 ease-in-out ${isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}`}>
         <div className="container mx-auto px-4">
             <div className="flex justify-between items-center py-3 border-b border-gray-800/50">
-                <img src="../assets/Fairgo_logo.png" alt="FAIRGO Logo" className="h-10 w-auto" />
+                <img src="../assets/Fairgo_logo.png" alt="FAIRGO Logo" className="h-8 w-auto" />
                 <button
                     onClick={() => setIsMenuOpen(false)}
                     className="text-gray-300 hover:text-white"
