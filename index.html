@@ -158,6 +158,22 @@
     animation: workflow-pulse 2s linear infinite;
   }
 
+  @keyframes fade-in-out-loop {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 1; }
+  }
+  .animate-fade-in-out-loop {
+    animation: fade-in-out-loop 4s ease-in-out infinite;
+  }
+
+  @keyframes flash-loop {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.2; }
+  }
+  .animate-flash-loop {
+    animation: flash-loop 1.5s ease-in-out infinite;
+  }
+
   @keyframes typing {
     from { width: 0; }
   }
@@ -165,6 +181,15 @@
     animation-name: typing;
     animation-fill-mode: forwards;
     width: 0;
+  }
+
+  @keyframes scroll {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  .animate-scroll {
+    animation: scroll 10s linear infinite;
   }
 
 </style>

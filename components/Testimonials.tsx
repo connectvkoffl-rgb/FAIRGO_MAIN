@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React from 'react';
 import { AnimatedElement } from './AnimatedElement';
-import { ChevronLeftIcon, ChevronRightIcon } from './icons';
 
 const SectionTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => (
     <div className="inline-block px-4 py-1 border border-gray-700 rounded-full text-sm bg-gray-900/50 mb-4">
@@ -8,75 +7,71 @@ const SectionTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => 
     </div>
 );
 
-const HighlightedText: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-    <span className="text-white relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-full after:h-px after:bg-cyan-400">
-        {children}
-    </span>
-);
-
 const testimonials = [
     {
-        quote: <>Their <HighlightedText>AI-driven approach</HighlightedText> helped us reach the right audience and grow faster with <HighlightedText>smarter insights</HighlightedText>—streamlining our strategy, improving engagement, and <HighlightedText>delivering results</HighlightedText>.</>,
-        image: "https://picsum.photos/seed/person1/400/400",
-        name: "Gwen Tesse",
-        handle: "@StudioFlair"
+        quote: "Their tools simplified our operations, reduced error, and gave us the clarity we needed to move faster with confidence.",
+        name: "jack hanma",
+        handle: "@HandBook",
+        rating: 4
     },
     {
-        quote: <>We streamlined our entire <HighlightedText>sales process</HighlightedText> using their AI tools—<HighlightedText>boosting speed</HighlightedText>, cutting costs, and seeing real, measurable growth within just a few short weeks of <HighlightedText>successful launch</HighlightedText>.</>,
-        image: "https://picsum.photos/seed/person2/400/400",
-        name: "Emily Ben",
-        handle: "@FlairAI"
+        quote: "The automation system they built was seamless, smart, and exactly what we needed to scale and work more efficiently.",
+        name: "mike tom",
+        handle: "@ToogleAI",
+        rating: 4
     },
     {
-        quote: <>Their <HighlightedText>automation</HighlightedText> workflows saved us <HighlightedText>countless hours</HighlightedText>—optimizing operations, reducing errors, and helping our team <HighlightedText>focus</HighlightedText> on what truly matters every single day <HighlightedText>across teams</HighlightedText>.</>,
-        image: "https://picsum.photos/seed/person3/400/400",
-        name: "Jack Hanna",
-        handle: "@HandBook"
-    }
+        quote: "Their AI solution helped us automate, focus on growth, saving time and improving productivity instantly.",
+        name: "gwen tesse",
+        handle: "@StudioFlair",
+        rating: 3
+    },
+    {
+        quote: "A transformative partnership. FAIRGO's strategic insights and technical execution are second to none.",
+        name: "ellen ripley",
+        handle: "@WeylandCorp",
+        rating: 5
+    },
 ];
 
-const TestimonialCard: React.FC<{ testimonial: typeof testimonials[0], reverse?: boolean }> = ({ testimonial, reverse }) => (
-    <div className={`perspective-container ${reverse ? 'reverse' : ''}`}>
-        <div className={`tilt-card grid md:grid-cols-2 gap-8 items-center ${reverse ? 'md:grid-flow-col-dense' : ''}`}>
-            <div className={`relative ${reverse ? 'md:col-start-2' : ''}`}>
-                <div className="absolute -inset-4 bg-gradient-to-br from-cyan-500/10 to-fuchsia-500/10 blur-xl"></div>
-                <img src={testimonial.image} alt={testimonial.name} className="relative rounded-lg w-full h-auto object-cover filter grayscale" />
-            </div>
-            <div className={`relative p-8 bg-gray-900/50 border border-gray-800/70 rounded-lg backdrop-blur-sm ${reverse ? 'md:col-start-1' : ''}`}>
-                 <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-gray-600"></div>
-                <div className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-gray-600"></div>
-                <div className="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-gray-600"></div>
-                <div className="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-gray-600"></div>
-                
-                <div className="inline-block px-3 py-1 border border-gray-600 rounded-md text-sm mb-6">
-                    Very satisfied
-                </div>
-                <p className="text-xl md:text-2xl leading-relaxed text-gray-300 mb-6">{testimonial.quote}</p>
-                <div className="flex items-center gap-4">
-                    <div className="text-yellow-400 flex">★★★★★</div>
-                    <div className="text-gray-400">{testimonial.handle}</div>
-                </div>
-            </div>
-        </div>
+const StarRating: React.FC<{ rating: number }> = ({ rating }) => (
+    <div className="flex items-center">
+        {[...Array(5)].map((_, i) => (
+            <svg
+                key={i}
+                className={`w-5 h-5 ${i < rating ? 'text-white' : 'text-gray-600'}`}
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+            </svg>
+        ))}
     </div>
 );
 
+const TestimonialCard: React.FC<{ testimonial: typeof testimonials[0] }> = ({ testimonial }) => (
+    <div className="relative p-8 bg-[#0A0A14]/50 border border-gray-800/70 rounded-lg backdrop-blur-sm h-full flex flex-col transition-all duration-300 hover:border-gray-700 hover:-translate-y-1">
+        {/* Corner Brackets */}
+        <div className="absolute top-3 left-3 w-4 h-4 border-t border-l border-gray-700"></div>
+        <div className="absolute top-3 right-3 w-4 h-4 border-t border-r border-gray-700"></div>
+        <div className="absolute bottom-3 left-3 w-4 h-4 border-b border-l border-gray-700"></div>
+        <div className="absolute bottom-3 right-3 w-4 h-4 border-b border-r border-gray-700"></div>
+
+        <div className="flex-grow">
+            <div className="flex justify-between items-center mb-6">
+                <span className="font-semibold text-white">{testimonial.handle}</span>
+                <StarRating rating={testimonial.rating} />
+            </div>
+            <p className="text-gray-400 leading-relaxed">{testimonial.quote}</p>
+        </div>
+
+        <p className="mt-8 text-gray-500">{testimonial.name}</p>
+    </div>
+);
+
+
 export const Testimonials: React.FC = () => {
-    const [currentIndex, setCurrentIndex] = useState(0);
-
-    const nextSlide = useCallback(() => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
-    }, []);
-
-    const prevSlide = () => {
-        setCurrentIndex((prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length);
-    };
-
-    useEffect(() => {
-        const slideInterval = setInterval(nextSlide, 5000); // Auto-slide every 5 seconds
-        return () => clearInterval(slideInterval);
-    }, [nextSlide]);
-
     return (
         <section className="py-20 px-4">
             <div className="container mx-auto">
@@ -86,48 +81,15 @@ export const Testimonials: React.FC = () => {
                     <AnimatedElement delay={200}><p className="mt-4 text-lg text-gray-400">Join customers who trust AI to transform their business</p></AnimatedElement>
                 </div>
                 
-                <AnimatedElement delay={300} variant="scale">
-                    <div className="relative">
-                        <div className="overflow-hidden">
-                            <div
-                                className="flex transition-transform duration-700 ease-in-out"
-                                style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-                            >
-                                {testimonials.map((testimonial, index) => (
-                                    <div key={index} className="w-full flex-shrink-0 px-2 md:px-4">
-                                        <TestimonialCard testimonial={testimonial} reverse={index % 2 !== 0} />
-                                    </div>
-                                ))}
+                <div className="relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_10%,white_90%,transparent)] group">
+                    <div className="flex animate-scroll group-hover:[animation-play-state:paused]">
+                        {[...testimonials, ...testimonials].map((testimonial, index) => (
+                            <div key={index} className="flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 p-4">
+                                <TestimonialCard testimonial={testimonial} />
                             </div>
-                        </div>
-
-                        <button 
-                            onClick={prevSlide}
-                            className="absolute top-1/2 -left-4 md:-left-8 -translate-y-1/2 z-20 bg-gray-800/50 p-2 rounded-full hover:bg-gray-700 transition-colors"
-                            aria-label="Previous testimonial"
-                        >
-                            <ChevronLeftIcon className="w-6 h-6 text-white" />
-                        </button>
-                        <button 
-                            onClick={nextSlide}
-                            className="absolute top-1/2 -right-4 md:-right-8 -translate-y-1/2 z-20 bg-gray-800/50 p-2 rounded-full hover:bg-gray-700 transition-colors"
-                            aria-label="Next testimonial"
-                        >
-                            <ChevronRightIcon className="w-6 h-6 text-white" />
-                        </button>
-
-                        <div className="flex justify-center mt-8 space-x-3">
-                            {testimonials.map((_, index) => (
-                                <button
-                                    key={index}
-                                    onClick={() => setCurrentIndex(index)}
-                                    className={`w-3 h-3 rounded-full transition-colors ${currentIndex === index ? 'bg-cyan-400' : 'bg-gray-600 hover:bg-gray-400'}`}
-                                    aria-label={`Go to testimonial ${index + 1}`}
-                                />
-                            ))}
-                        </div>
+                        ))}
                     </div>
-                </AnimatedElement>
+                </div>
             </div>
         </section>
     );
