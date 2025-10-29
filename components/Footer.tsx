@@ -7,7 +7,7 @@ export const Footer: React.FC = () => {
         <footer className="py-20 px-4 border-t border-gray-800/50">
             <div className="container mx-auto text-center">
                 <AnimatedElement variant="scale">
-                    <img src="../assets/Fairgo_logo.png" alt="FAIRGO Logo" className="h-12 w-auto mx-auto mb-4" />
+                    <img src="https://i.ibb.co/8gH1SvD6/Fairgo-logo.png" alt="FAIRGO Logo" className="h-12 w-auto mx-auto mb-4" />
                 </AnimatedElement>
                 <AnimatedElement delay={100}>
                     <p className="text-gray-400 mb-8 max-w-md mx-auto">Advanced AI solutions, designed for future-focused teams and innovators.</p>
