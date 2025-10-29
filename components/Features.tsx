@@ -35,7 +35,7 @@ export const Features: React.FC = () => {
 
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <AnimatedElement variant="left" className="md:col-span-1 lg:col-span-1">
-                        <img src="../assets/ai.gif" alt="Hands-Free" className="rounded-lg h-full w-full object-cover opacity-50 filter grayscale contrast-150" />
+                        <img src="https://picsum.photos/seed/feature1/400/530" alt="Hands-Free" className="rounded-lg h-full w-full object-cover opacity-50 filter grayscale contrast-150" />
                     </AnimatedElement>
                     <div className="md:col-span-1 lg:col-span-2 grid grid-rows-2 gap-8">
                         <AnimatedElement delay={100} variant="right">
