@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { AnimatedElement } from './AnimatedElement';
 import { MicrophoneIcon } from './icons';
@@ -19,7 +20,8 @@ const AutomatedTasksCard: React.FC = () => {
     const containerRef = useRef<HTMLDivElement>(null);
     // FIX: Corrected the type for the timeout ref. `NodeJS.Timeout` is not available in the browser.
     // `ReturnType<typeof setTimeout>` correctly resolves to `number` in a browser environment.
-    const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
+    // FIX: Explicitly pass `undefined` as the initial value to `useRef` to resolve the "Expected 1 arguments, but got 0" error.
+    const timeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
     const isInitialMount = useRef(true);
 
     useEffect(() => {

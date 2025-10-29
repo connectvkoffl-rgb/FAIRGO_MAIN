@@ -35,71 +35,65 @@ export const sendMessage = async (chat: Chat, message: string): Promise<string> 
   }
 };
 
-// FIX: Add generateImage function to resolve import error in ImageGenerator.tsx.
+// FIX: Added generateImage function to generate images using the Gemini API.
 export const generateImage = async (prompt: string): Promise<string> => {
-  try {
-    const response = await ai.models.generateImages({
-      model: 'imagen-4.0-generate-001',
-      prompt: prompt,
-      config: {
-        numberOfImages: 1,
-        outputMimeType: 'image/jpeg',
-        aspectRatio: '16:9',
-      },
-    });
+    try {
+        const response = await ai.models.generateImages({
+            model: 'imagen-4.0-generate-001',
+            prompt: prompt,
+            config: {
+                numberOfImages: 1,
+                outputMimeType: 'image/jpeg',
+                aspectRatio: '16:9',
+            },
+        });
 
-    const base64ImageBytes: string = response.generatedImages[0].image.imageBytes;
-    const imageUrl = `data:image/jpeg;base64,${base64ImageBytes}`;
-    return imageUrl;
-  } catch (error) {
-    console.error("Error generating image:", error);
-    throw new Error("Failed to generate image.");
-  }
+        const base64ImageBytes: string = response.generatedImages[0].image.imageBytes;
+        const imageUrl = `data:image/jpeg;base64,${base64ImageBytes}`;
+        return imageUrl;
+    } catch (error) {
+        console.error("Error generating image:", error);
+        throw new Error("Failed to generate image.");
+    }
 };
 
-// FIX: Add generateVideo function to resolve import error in VideoGenerator.tsx.
+// FIX: Added generateVideo function to generate videos using the Gemini API.
 export const generateVideo = async (
-  prompt: string,
-  imageBase64: string,
-  mimeType: string,
-  aspectRatio: '16:9' | '9:16'
+    prompt: string,
+    imageBase64: string,
+    mimeType: string,
+    aspectRatio: '16:9' | '9:16'
 ): Promise<string> => {
-  // As per guidelines for Veo, create a new GoogleGenAI instance right before the API call
-  // to ensure it uses the most up-to-date API key from the dialog.
-  const videoAI = new GoogleGenAI({ apiKey: process.env.API_KEY });
+    // Create a new instance for video generation to use the latest API key from the aistudio dialog
+    const videoAI = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
-  try {
-    let operation = await videoAI.models.generateVideos({
-      model: 'veo-3.1-fast-generate-preview',
-      prompt: prompt,
-      image: {
-        imageBytes: imageBase64,
-        mimeType: mimeType,
-      },
-      config: {
-        numberOfVideos: 1,
-        resolution: '720p',
-        aspectRatio: aspectRatio,
-      },
-    });
+    try {
+        let operation = await videoAI.models.generateVideos({
+            model: 'veo-3.1-fast-generate-preview',
+            prompt: prompt,
+            image: {
+                imageBytes: imageBase64,
+                mimeType: mimeType,
+            },
+            config: {
+                numberOfVideos: 1,
+                resolution: '720p',
+                aspectRatio: aspectRatio
+            }
+        });
 
-    // Polling for completion
-    while (!operation.done) {
-      // Wait for 10 seconds before checking again
-      await new Promise(resolve => setTimeout(resolve, 10000));
-      operation = await videoAI.operations.getVideosOperation({ operation: operation });
+        while (!operation.done) {
+            await new Promise(resolve => setTimeout(resolve, 10000));
+            operation = await videoAI.operations.getVideosOperation({ operation: operation });
+        }
+
+        const downloadLink = operation.response?.generatedVideos?.[0]?.video?.uri;
+        if (!downloadLink) {
+            throw new Error("Video generation completed, but no download link was provided.");
+        }
+        return downloadLink;
+    } catch (error) {
+        console.error("Error generating video:", error);
+        throw error; // Re-throw the original error to be handled in the component
     }
-
-    const downloadLink = operation.response?.generatedVideos?.[0]?.video?.uri;
-
-    if (!downloadLink) {
-      throw new Error("Video generation did not return a download link.");
-    }
-    
-    return downloadLink;
-  } catch (error) {
-    console.error("Error in generateVideo service:", error);
-    // Rethrow to be handled by the component
-    throw error;
-  }
 };

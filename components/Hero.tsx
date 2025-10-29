@@ -1,15 +1,12 @@
-
 import React from 'react';
 import { PhoneIcon, CodeIcon } from './icons';
 import { AnimatedElement } from './AnimatedElement';
 import { PulsingCircles } from './PulsingCircles';
 
-// Base64 for the FAIRGO logo image
-const logoBase64 = "../assets/FAIRGO_Logo.png";
-
 const HighlightedText: React.FC<{ children: React.ReactNode }> = ({ children }) => (
     <span className="relative inline-block">
-        <span className="relative text-white">{children}</span>
+        {/* FIX: Removed the extra span that was wrapping children. The relative positioning should apply to the children directly. */}
+        {children}
         <span className="absolute -inset-1 border border-gray-600 rounded-md"></span>
     </span>
 );
@@ -27,22 +24,7 @@ export const Hero: React.FC = () => {
                 <div className="relative flex justify-center items-center mb-8 h-24 md:h-36">
                      <PulsingCircles />
                      <div className="relative h-full">
-                         <img src={logoBase64} alt="FAIRGO Logo" className="relative h-full w-auto" />
-                         <div
-                            className="absolute top-0 left-0 w-full h-full bg-contain bg-center bg-no-repeat animate-pulse"
-                            style={{
-                                backgroundImage: `url(${logoBase64})`,
-                                filter: 'blur(8px) drop-shadow(0 0 8px #22d3ee) opacity(0.7)',
-                            }}
-                        ></div>
-                        <div
-                            className="absolute top-0 left-0 w-full h-full bg-contain bg-center bg-no-repeat animate-pulse"
-                            style={{
-                                backgroundImage: `url(${logoBase64})`,
-                                filter: 'blur(8px) drop-shadow(0 0 8px #d946ef) opacity(0.7)',
-                                animationDelay: '1s'
-                            }}
-                        ></div>
+                         <img src="../assets/Fairgo_croped.png" alt="FAIRGO Cropped Logo" className="relative h-full w-auto animate-pulse-glow-core" />
                     </div>
                 </div>
             </AnimatedElement>

@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 import { Header } from './components/Header';
@@ -8,7 +7,7 @@ import { Features } from './components/Features';
 import { Process } from './components/Process';
 import { Projects } from './components/Projects';
 import { Achievements } from './components/Achievements';
-import { Campaigns } from './components/Campaigns';
+// import { Campaigns } from './components/Campaigns';
 import { Comparison } from './components/Comparison';
 import { Testimonials } from './components/Testimonials';
 import { Faq } from './components/Faq';
@@ -29,7 +28,7 @@ const App: React.FC = () => {
           <Process />
           <Projects />
           <Achievements />
-          <Campaigns />
+          {/* <Campaigns /> */}
           <Comparison />
           <Testimonials />
           <Faq />
