@@ -167,7 +167,6 @@ export const VoiceNavigation: React.FC = () => {
     const toggleListening = () => {
         if (!recognitionRef.current) return;
         stopAutoScroll();
-        const isMobile = window.innerWidth < 768;
 
         if (isListening) {
             handleContinuousToggle(false);
@@ -177,11 +176,8 @@ export const VoiceNavigation: React.FC = () => {
                 setTimeout(() => setShowHelp(false), 3000);
                 sessionStorage.setItem('voiceHelpShown', 'true');
             }
-            if (isMobile) {
-                handleContinuousToggle(true);
-            } else {
-                recognitionRef.current.start();
-            }
+            // Unify behavior to always toggle continuous mode
+            handleContinuousToggle(true);
         }
     };
 
@@ -191,10 +187,16 @@ export const VoiceNavigation: React.FC = () => {
             <button
                 id="voice-nav-button"
                 onClick={toggleListening}
-                className={`hidden md:flex fixed bottom-5 right-24 w-16 h-16 rounded-full items-center justify-center shadow-lg transform hover:scale-110 transition-all z-50 ${isListening ? 'bg-red-500 text-white animate-pulse' : 'bg-white text-black'}`}
-                aria-label="Toggle voice navigation"
+                className={`hidden md:flex fixed bottom-5 right-24 w-16 h-16 rounded-full items-center justify-center shadow-lg transform hover:scale-110 transition-all z-50 ${
+                    continuousMode ? 'bg-red-500 text-white animate-pulse' : 'bg-white text-black'
+                }`}
+                aria-label={continuousMode ? "Stop Voice Navigation" : "Start Voice Navigation"}
             >
-                <MicrophoneIcon className="w-8 h-8" />
+                 {continuousMode ? (
+                    <StopCircleIcon className="w-8 h-8" />
+                ) : (
+                    <MicrophoneIcon className="w-8 h-8" />
+                )}
             </button>
 
             {/* Mobile Button */}
