@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { generateImage } from '../services/geminiService';
 import { SparklesIcon } from './icons';

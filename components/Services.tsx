@@ -1,20 +1,20 @@
-
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { AnimatedElement } from './AnimatedElement';
 import { MicrophoneIcon } from './icons';
+import { CmsContext } from '../context/CmsContext';
 
 const tasks = [
-    'Cost Management',
-    'Payment Reminder',
-    'Employee Tracking',
-    'Social Media Post',
-    'Data Analysis',
-    'Report Generation'
+    'Automated Driver Dispatch',
+    'Dynamic Surge Pricing',
+    'Real-time Route Optimization',
+    'Smart Inventory Alerts',
+    'Automated Order Processing',
+    'Personalized Product Feeds'
 ];
 // Duplicate the list to create a seamless, infinite scrolling effect
 const loopedTasks = [...tasks, ...tasks, ...tasks];
 
-const AutomatedTasksCard: React.FC = () => {
+const AutomatedTasksCard: React.FC<{ card: any }> = ({ card }) => {
     // Start at the beginning of the second (middle) block of tasks
     const [activeIndex, setActiveIndex] = useState(tasks.length);
     const containerRef = useRef<HTMLDivElement>(null);
@@ -75,8 +75,8 @@ const AutomatedTasksCard: React.FC = () => {
 
             {/* Main card content */}
             <div className="mb-6">
-                <h3 className="text-2xl font-semibold text-white mb-2">Automate Repetitive Tasks</h3>
-                <p className="text-gray-400">Eliminate busywork and let AI handle the routine so your team can focus on what matters.</p>
+                <h3 className="text-2xl font-semibold text-white mb-2">{card.title}</h3>
+                <p className="text-gray-400">{card.description}</p>
             </div>
 
             {/* The visual animation part */}
@@ -133,7 +133,7 @@ const AutomatedTasksCard: React.FC = () => {
     );
 };
 
-const CustomAIAgentsCard: React.FC = () => {
+const CustomAIAgentsCard: React.FC<{ card: any }> = ({ card }) => {
     return (
         <div className="relative p-8 bg-gray-900/50 border border-gray-800/70 rounded-lg backdrop-blur-sm h-full transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-1 hover-glow">
             {/* Corner decorators */}
@@ -144,8 +144,8 @@ const CustomAIAgentsCard: React.FC = () => {
 
             {/* Main card content */}
             <div className="mb-6">
-                <h3 className="text-2xl font-semibold text-white mb-2">AI Calling Agents</h3>
-                <p className="text-gray-400">Engage customers with real-time, human-like voice conversations powered by our advanced AI.</p>
+                <h3 className="text-2xl font-semibold text-white mb-2">{card.title}</h3>
+                <p className="text-gray-400">{card.description}</p>
             </div>
 
             {/* Animation part */}
@@ -213,7 +213,7 @@ const AnimatedAIChipIcon: React.FC<{ className?: string }> = ({ className }) => 
 };
 
 
-const AIConsultancyCard: React.FC = () => {
+const AIConsultancyCard: React.FC<{ card: any }> = ({ card }) => {
     return (
         <div className="relative p-8 bg-gray-900/50 border border-gray-800/70 rounded-lg backdrop-blur-sm h-full transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-1 hover-glow">
             {/* Corner decorators */}
@@ -223,8 +223,8 @@ const AIConsultancyCard: React.FC = () => {
             <div className="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-gray-600"></div>
 
             <div className="mb-6">
-                <h3 className="text-2xl font-semibold text-white mb-2">AI Consultancy Services</h3>
-                <p className="text-gray-400">Expert guidance to align technology with your business goals and create a roadmap for success.</p>
+                <h3 className="text-2xl font-semibold text-white mb-2">{card.title}</h3>
+                <p className="text-gray-400">{card.description}</p>
             </div>
 
             <div className="relative w-full h-[252px] bg-black/20 border border-gray-800 rounded-xl p-4 flex items-center justify-center overflow-hidden">
@@ -234,7 +234,7 @@ const AIConsultancyCard: React.FC = () => {
     );
 };
 
-const AutomatedWorkflowsCard: React.FC = () => {
+const AutomatedWorkflowsCard: React.FC<{ card: any }> = ({ card }) => {
     const nodes = [
         { id: 'start', cx: 30, cy: 60, text: 'Input' },
         { id: 'p1', cx: 85, cy: 25, text: 'Analyze' },
@@ -260,8 +260,8 @@ const AutomatedWorkflowsCard: React.FC = () => {
             <div className="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-gray-600"></div>
 
             <div className="mb-6">
-                <h3 className="text-2xl font-semibold text-white mb-2">Automated Workflows</h3>
-                <p className="text-gray-400">Design and deploy intelligent systems that operate consistently with zero human oversight.</p>
+                <h3 className="text-2xl font-semibold text-white mb-2">{card.title}</h3>
+                <p className="text-gray-400">{card.description}</p>
             </div>
 
             <div className="relative w-full h-[252px] bg-black/20 border border-gray-800 rounded-xl p-4 flex items-center justify-center overflow-hidden">
@@ -308,27 +308,48 @@ const SectionTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 );
 
 export const Services: React.FC = () => {
+    const { content } = useContext(CmsContext);
+    const { services } = content;
+
     return (
-        <section className="py-20 px-4">
+        <section id="services" className="py-20 px-4">
             <div className="container mx-auto">
                 <div className="text-center mb-12">
                     <AnimatedElement variant="scale"><SectionTitle>Services</SectionTitle></AnimatedElement>
-                    <AnimatedElement delay={100}><h2 className="text-4xl md:text-5xl font-bold text-white">Our AI-Driven Services</h2></AnimatedElement>
-                    <AnimatedElement delay={200}><p className="mt-4 text-lg text-gray-400">Leverage AI features that boost performance to your business</p></AnimatedElement>
+                    <AnimatedElement delay={100}><h2 className="text-4xl md:text-5xl font-bold text-white">{services.title}</h2></AnimatedElement>
+                    <AnimatedElement delay={200}><p className="mt-4 text-lg text-gray-400">{services.subtitle}</p></AnimatedElement>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-8">
                     <AnimatedElement delay={200} variant="left">
-                        <AutomatedTasksCard />
+                        <AutomatedTasksCard card={services.cards[0]} />
                     </AnimatedElement>
                     <AnimatedElement delay={350} variant="right">
-                        <CustomAIAgentsCard />
+                        <CustomAIAgentsCard card={services.cards[1]} />
                     </AnimatedElement>
                     <AnimatedElement delay={400} variant="left">
-                        <AIConsultancyCard />
+                        <AIConsultancyCard card={services.cards[2]} />
                     </AnimatedElement>
                     <AnimatedElement delay={550} variant="right">
-                        <AutomatedWorkflowsCard />
+                        <AutomatedWorkflowsCard card={services.cards[3]} />
+                    </AnimatedElement>
+                </div>
+
+                <div className="mt-20 text-center">
+                    <AnimatedElement delay={200}>
+                        <h3 className="text-2xl font-semibold text-white mb-6">Key Technologies We Use</h3>
+                        <div className="flex flex-wrap justify-center items-center gap-4 max-w-3xl mx-auto">
+                            {services.keyTechnologies.map((tech, index) => (
+                                <AnimatedElement
+                                    key={tech.id}
+                                    delay={300 + index * 80}
+                                    variant="up"
+                                    className="px-4 py-2 bg-gray-900/50 border border-gray-800/70 rounded-md text-gray-300"
+                                >
+                                    {tech.name}
+                                </AnimatedElement>
+                            ))}
+                        </div>
                     </AnimatedElement>
                 </div>
             </div>

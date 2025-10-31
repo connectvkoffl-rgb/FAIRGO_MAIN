@@ -1,5 +1,5 @@
 {
-  "name": "fairgo---ai-automation-solutions",
+  "name": "copy-of-fairgo---ai-automation-solutions",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -11,7 +11,8 @@
   "dependencies": {
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "@google/genai": "^1.27.0"
+    "@google/genai": "^1.27.0",
+    "uuid": "^13.0.0"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",

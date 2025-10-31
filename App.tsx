@@ -1,42 +1,44 @@
-import React from 'react';
 
-import { Header } from './components/Header';
-import { Hero } from './components/Hero';
-import { Services } from './components/Services';
-import { Features } from './components/Features';
-import { Process } from './components/Process';
-import { Projects } from './components/Projects';
-import { Achievements } from './components/Achievements';
-// import { Campaigns } from './components/Campaigns';
-import { Comparison } from './components/Comparison';
-import { Testimonials } from './components/Testimonials';
-import { Faq } from './components/Faq';
-import { Footer } from './components/Footer';
-import { ChatBot } from './components/ChatBot';
-import { BackgroundAnimation } from './components/BackgroundAnimation';
+import React, { useState, useEffect } from 'react';
+import Website from './pages/Website';
+import LoginPage from './pages/LoginPage';
+import AdminDashboard from './pages/AdminDashboard';
+import ToolsPage from './pages/ToolsPage';
+import { CmsProvider } from './context/CmsContext';
+import { isAuthenticated, setAuthCallback } from './services/authService';
 
 const App: React.FC = () => {
+  const [loggedIn, setLoggedIn] = useState(isAuthenticated());
+  const [route, setRoute] = useState(window.location.hash);
+
+  useEffect(() => {
+    setAuthCallback(setLoggedIn);
+
+    const handleHashChange = () => {
+      setRoute(window.location.hash);
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+      setAuthCallback(null);
+    };
+  }, []);
+  
+  const renderPage = () => {
+    if (route.startsWith('/#admin')) {
+      return loggedIn ? <AdminDashboard /> : <LoginPage />;
+    }
+    if (route.startsWith('/#tools')) {
+        return <ToolsPage />;
+    }
+    return <Website />;
+  };
+
   return (
-    <div className="bg-[#01010c] text-gray-300 font-sans antialiased overflow-x-hidden">
-      <BackgroundAnimation />
-      <div className="relative z-10">
-        <Header />
-        <main>
-          <Hero />
-          <Services />
-          <Features />
-          <Process />
-          <Projects />
-          <Achievements />
-          {/* <Campaigns /> */}
-          <Comparison />
-          <Testimonials />
-          <Faq />
-        </main>
-        <Footer />
-        <ChatBot />
-      </div>
-    </div>
+    <CmsProvider>
+        {renderPage()}
+    </CmsProvider>
   );
 };
 

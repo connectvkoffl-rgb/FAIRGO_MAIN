@@ -1,38 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { AnimatedElement } from './AnimatedElement';
+import { CmsContext } from '../context/CmsContext';
 
 const SectionTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => (
     <div className="inline-block px-4 py-1 border border-gray-700 rounded-full text-sm bg-gray-900/50 mb-4">
         {children}
     </div>
 );
-
-const testimonials = [
-    {
-        quote: "Their tools simplified our operations, reduced error, and gave us the clarity we needed to move faster with confidence.",
-        name: "jack hanma",
-        handle: "@HandBook",
-        rating: 4
-    },
-    {
-        quote: "The automation system they built was seamless, smart, and exactly what we needed to scale and work more efficiently.",
-        name: "mike tom",
-        handle: "@ToogleAI",
-        rating: 4
-    },
-    {
-        quote: "Their AI solution helped us automate, focus on growth, saving time and improving productivity instantly.",
-        name: "gwen tesse",
-        handle: "@StudioFlair",
-        rating: 3
-    },
-    {
-        quote: "A transformative partnership. FAIRGO's strategic insights and technical execution are second to none.",
-        name: "ellen ripley",
-        handle: "@WeylandCorp",
-        rating: 5
-    },
-];
 
 const StarRating: React.FC<{ rating: number }> = ({ rating }) => (
     <div className="flex items-center">
@@ -50,7 +24,7 @@ const StarRating: React.FC<{ rating: number }> = ({ rating }) => (
     </div>
 );
 
-const TestimonialCard: React.FC<{ testimonial: typeof testimonials[0] }> = ({ testimonial }) => (
+const TestimonialCard: React.FC<{ testimonial: any }> = ({ testimonial }) => (
     <div className="relative p-8 bg-[#0A0A14]/50 border border-gray-800/70 rounded-lg backdrop-blur-sm h-full flex flex-col transition-all duration-300 hover:border-gray-700 hover:-translate-y-1">
         {/* Corner Brackets */}
         <div className="absolute top-3 left-3 w-4 h-4 border-t border-l border-gray-700"></div>
@@ -72,19 +46,22 @@ const TestimonialCard: React.FC<{ testimonial: typeof testimonials[0] }> = ({ te
 
 
 export const Testimonials: React.FC = () => {
+    const { content } = useContext(CmsContext);
+    const { testimonials } = content;
+
     return (
         <section className="py-20 px-4">
             <div className="container mx-auto">
                 <div className="text-center mb-16">
                     <AnimatedElement variant="scale"><SectionTitle>Reviews</SectionTitle></AnimatedElement>
-                    <AnimatedElement delay={100}><h2 className="text-4xl md:text-5xl font-bold text-white">What Our Clients Say</h2></AnimatedElement>
-                    <AnimatedElement delay={200}><p className="mt-4 text-lg text-gray-400">Join customers who trust AI to transform their business</p></AnimatedElement>
+                    <AnimatedElement delay={100}><h2 className="text-4xl md:text-5xl font-bold text-white">{testimonials.title}</h2></AnimatedElement>
+                    <AnimatedElement delay={200}><p className="mt-4 text-lg text-gray-400">{testimonials.subtitle}</p></AnimatedElement>
                 </div>
                 
                 <div className="relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_10%,white_90%,transparent)] group">
                     <div className="flex animate-scroll group-hover:[animation-play-state:paused]">
-                        {[...testimonials, ...testimonials].map((testimonial, index) => (
-                            <div key={index} className="flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 p-4">
+                        {[...testimonials.list, ...testimonials.list].map((testimonial: any, index: number) => (
+                            <div key={`${testimonial.id}-${index}`} className="flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 p-4">
                                 <TestimonialCard testimonial={testimonial} />
                             </div>
                         ))}

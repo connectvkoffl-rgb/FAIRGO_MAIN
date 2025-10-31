@@ -1,8 +1,8 @@
-
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { PhoneIcon, CodeIcon } from './icons';
 import { AnimatedElement } from './AnimatedElement';
 import { PulsingCircles } from './PulsingCircles';
+import { CmsContext } from '../context/CmsContext';
 
 const TypingEffect: React.FC<{ phrases: string[], className?: string }> = ({ phrases, className }) => {
     const [phraseIndex, setPhraseIndex] = useState(0);
@@ -13,6 +13,8 @@ const TypingEffect: React.FC<{ phrases: string[], className?: string }> = ({ phr
     const delayAfterTyping = 2000;
 
     useEffect(() => {
+        if (!phrases || phrases.length === 0) return;
+        
         const handleTyping = () => {
             const currentPhrase = phrases[phraseIndex];
             if (isDeleting) {
@@ -34,6 +36,13 @@ const TypingEffect: React.FC<{ phrases: string[], className?: string }> = ({ phr
         const timeoutId = setTimeout(handleTyping, isDeleting ? deletingSpeed : typingSpeed);
         return () => clearTimeout(timeoutId);
     }, [text, isDeleting, phraseIndex, phrases]);
+    
+    // Reset typing effect when phrases change
+    useEffect(() => {
+      setText('');
+      setIsDeleting(false);
+      setPhraseIndex(0);
+    }, [phrases]);
 
     return (
         <span className={`inline-block font-bold text-white ${className}`}>
@@ -43,36 +52,44 @@ const TypingEffect: React.FC<{ phrases: string[], className?: string }> = ({ phr
     );
 };
 
+interface HeroProps {
+    onBookCallClick: () => void;
+}
 
-export const Hero: React.FC = () => {
+export const Hero: React.FC<HeroProps> = ({ onBookCallClick }) => {
+  const { content } = useContext(CmsContext);
+  const { hero } = content;
+
   return (
-    <section className="py-24 md:py-32 text-center relative overflow-hidden">
+    <section id="home" className="py-24 md:py-32 text-center relative overflow-hidden">
         <div className="container mx-auto px-4 z-10">
             <AnimatedElement>
                 <div className="inline-block px-4 py-1 border border-gray-700 rounded-full text-sm bg-gray-900/50 mb-8">
-                    Introducing World's First AI Calling Technology
+                    {hero.tagline}
                 </div>
             </AnimatedElement>
             <AnimatedElement delay={100} variant="scale">
                 <div className="relative flex justify-center items-center mb-8 h-24 md:h-36">
                      <PulsingCircles />
                      <div className="relative h-full">
-                         <img src="https://i.ibb.co/XxtNxfHf/Fairgo-croped.png" alt="FAIRGO Cropped Logo" className="relative h-full w-auto animate-pulse-glow-core" />
+                         <img src="../assets/Fairgo_croped.png" alt="FAIRGO Cropped Logo" className="relative h-full w-auto animate-pulse-glow-core" />
                     </div>
                 </div>
             </AnimatedElement>
             
             <div className="mb-10 max-w-5xl mx-auto text-3xl md:text-4xl leading-tight font-light text-gray-400 h-40 md:h-32 flex items-center justify-center">
                 <AnimatedElement delay={200} as="p" className="px-4">
-                    "We turn your vision into <br />
-                    <TypingEffect phrases={['actionable insights', 'measurable growth', 'automated success']} className="text-4xl md:text-5xl" />
+                    "{hero.titleLine1} <br />
+                    <TypingEffect phrases={hero.typingPhrases} className="text-4xl md:text-5xl" />
                     ."
                 </AnimatedElement>
             </div>
 
             <AnimatedElement delay={300}>
                 <div className="flex justify-center items-center space-x-4">
-                    <button className="flex items-center gap-2 bg-white text-black px-6 py-3 rounded-md font-semibold transition-all duration-300 transform hover:scale-105 hover:-translate-y-1">
+                    <button 
+                        onClick={onBookCallClick}
+                        className="flex items-center gap-2 bg-white text-black px-6 py-3 rounded-md font-semibold transition-all duration-300 transform hover:scale-105 hover:-translate-y-1">
                         <PhoneIcon className="w-5 h-5" />
                         Book A Call
                     </button>

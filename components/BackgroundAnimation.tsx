@@ -20,26 +20,32 @@ export const BackgroundAnimation: React.FC = () => {
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(window.devicePixelRatio);
         currentMount.appendChild(renderer.domElement);
-
-        const particleCount = 5000;
+        
+        // --- Particle Creation ---
+        const particleCount = 2000;
         const positions = new Float32Array(particleCount * 3);
         for (let i = 0; i < particleCount * 3; i++) {
             positions[i] = (Math.random() - 0.5) * 100;
         }
+
         const particlesGeometry = new THREE.BufferGeometry();
         particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        
         const particlesMaterial = new THREE.PointsMaterial({
-            color: 0x44d5ff,
-            size: 0.1,
+            color: 0x00aaff,
+            size: 0.05,
             transparent: true,
-            opacity: 0.7
+            opacity: 0.7,
+            blending: THREE.AdditiveBlending,
         });
+        
         const particleSystem = new THREE.Points(particlesGeometry, particlesMaterial);
         scene.add(particleSystem);
         
+        // --- Faint connecting lines ---
         const linesGeometry = new THREE.BufferGeometry();
         const linePositions = [];
-        const connections = 200;
+        const connections = 150;
         for (let i = 0; i < connections; i++) {
             const startIndex = Math.floor(Math.random() * particleCount) * 3;
             const endIndex = Math.floor(Math.random() * particleCount) * 3;
@@ -66,8 +72,8 @@ export const BackgroundAnimation: React.FC = () => {
         const animate = () => {
             requestAnimationFrame(animate);
 
-            particleSystem.rotation.y += 0.0005;
-            lines.rotation.y += 0.0005;
+            particleSystem.rotation.y += 0.0003;
+            lines.rotation.y += 0.0002;
             
             camera.position.x += (mouseX - camera.position.x) * 0.05;
             camera.position.y += (-mouseY - camera.position.y) * 0.05;

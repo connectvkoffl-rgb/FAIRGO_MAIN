@@ -1,6 +1,6 @@
-
-import React from 'react';
+import React, { useContext } from 'react';
 import { AnimatedElement } from './AnimatedElement';
+import { CmsContext } from '../context/CmsContext';
 
 const SectionTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => (
     <div className="inline-block px-4 py-1 border border-gray-700 rounded-full text-sm bg-gray-900/50 mb-4">
@@ -190,7 +190,7 @@ const RideHailingEcosystemDiagram: React.FC<{ className?: string }> = ({ classNa
         </defs>
 
         {/* Central Taxi Icon */}
-        <g transform="translate(100, 75) scale(1.8)" className="ecosystem-pulse">
+        <g transform="translate(100, 75) scale(1.8)" className="ecosystem-pulse" opacity="0.75">
             <g fill="none" stroke="url(#eco-grad)" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round" filter="url(#eco-glow)">
                 {/* Taxi Body */}
                 <path d="M 17 11 H 3 C 2.44772 11 2 10.5523 2 10 V 6 C 2 5.44772 2.44772 5 3 5 H 4.5 L 6 3 H 14 L 15.5 5 H 17 C 17.5523 5 18 5.44772 18 6 V 10 C 18 10.5523 17.5523 11 17 11 Z" />
@@ -260,40 +260,35 @@ const ProcessStep: React.FC<{ step: number, title: string, description: string, 
 );
 
 export const Process: React.FC = () => {
+    const { content } = useContext(CmsContext);
+    const { process } = content;
+    
+    const visuals = [
+        <IVRDiagram className="w-full h-full opacity-70" />,
+        <AIDispatchDiagram className="w-full h-full" />,
+        <RideHailingEcosystemDiagram className="w-full h-full" />
+    ];
+
     return (
         <section className="py-20 px-4">
             <div className="container mx-auto">
                 <div className="text-center mb-12">
                     <AnimatedElement variant="scale"><SectionTitle>Process</SectionTitle></AnimatedElement>
-                    <AnimatedElement delay={100}><h2 className="text-4xl md:text-5xl font-bold text-white">Process is Result</h2></AnimatedElement>
-                    <AnimatedElement delay={200}><p className="mt-4 text-lg text-gray-400">The real outcome is only as strong as the system behind it.</p></AnimatedElement>
+                    <AnimatedElement delay={100}><h2 className="text-4xl md:text-5xl font-bold text-white">{process.title}</h2></AnimatedElement>
+                    <AnimatedElement delay={200}><p className="mt-4 text-lg text-gray-400">{process.subtitle}</p></AnimatedElement>
                 </div>
 
                 <div className="grid md:grid-cols-3 gap-8 items-stretch">
-                    <AnimatedElement variant="left">
-                        <ProcessStep 
-                            step={1}
-                            title="Map Accessibility and Define Fair Value"
-                            description="Map user needs with omni-channel flows (IVR, SMS). We establish a driver-first Fair Value Proposition with low commissions and guaranteed income to build a motivated and stable fleet."
-                            visual={<IVRDiagram className="w-full h-full opacity-70" />}
-                        />
-                    </AnimatedElement>
-                     <AnimatedElement delay={150} variant="up">
-                        <ProcessStep 
-                            step={2}
-                            title="Deploy AI Dispatch and Omni-Channel Tech"
-                            description="Deploy our core AI Dispatch Matcher to optimize rides and minimize deadhead miles. Our AI integrates with all booking channels for a hyper-efficient platform delivering sub-5-minute wait times."
-                            visual={<AIDispatchDiagram className="w-full h-full" />}
-                        />
-                    </AnimatedElement>
-                     <AnimatedElement delay={300} variant="right">
-                        <ProcessStep 
-                            step={3}
-                            title="Optimize Fairness and Scale Ecosystem"
-                            description="Activate our AI Bias Prevention Framework and scale the ecosystem with key partners for driver financing and tech advantage, creating a transparent, ethical, and scalable ride-hailing platform."
-                            visual={<RideHailingEcosystemDiagram className="w-full h-full" />}
-                        />
-                    </AnimatedElement>
+                    {process.steps.map((step: any, index: number) => (
+                         <AnimatedElement key={index} delay={index * 150} variant={index === 0 ? 'left' : index === 1 ? 'up' : 'right'}>
+                            <ProcessStep 
+                                step={index + 1}
+                                title={step.title}
+                                description={step.description}
+                                visual={visuals[index]}
+                            />
+                        </AnimatedElement>
+                    ))}
                 </div>
             </div>
         </section>

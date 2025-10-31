@@ -1,5 +1,7 @@
 {
-  "name": "FAIRGO - AI Automation Solutions",
+  "name": "Copy of FAIRGO - AI Automation Solutions",
   "description": "A modern, dark-themed landing page for an AI automation company, featuring sections for services, projects, testimonials, and FAQs. Includes an AI-powered image generator and a chatbot for user engagement.",
-  "requestFramePermissions": []
+  "requestFramePermissions": [
+    "microphone"
+  ]
 }

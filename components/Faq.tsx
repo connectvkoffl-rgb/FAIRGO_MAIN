@@ -1,28 +1,9 @@
-
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { PlusIcon, MinusIcon } from './icons';
 import { AnimatedElement } from './AnimatedElement';
+import { CmsContext } from '../context/CmsContext';
 
-const faqData = [
-    {
-        question: "What services do you offer?",
-        answer: "We specialize in AI solutions, including machine learning models, chatbots, predictive analytics, and consulting tailored to your business needs."
-    },
-    {
-        question: "How long does it take to develop an AI solution?",
-        answer: "The timeline varies based on complexity, but a typical project can range from 3 to 6 months from discovery to deployment."
-    },
-    {
-        question: "Do I need technical expertise to work with you?",
-        answer: "No, our team handles all the technical aspects. We work closely with you to understand your goals and translate them into effective AI solutions."
-    },
-    {
-        question: "Is my data safe when working with your agency?",
-        answer: "Absolutely. We adhere to strict data privacy and security protocols to ensure your information is always protected."
-    }
-];
-
-const FaqItem: React.FC<{ item: typeof faqData[0], isOpen: boolean, onClick: () => void }> = ({ item, isOpen, onClick }) => (
+const FaqItem: React.FC<{ item: any, isOpen: boolean, onClick: () => void }> = ({ item, isOpen, onClick }) => (
     <div className="border-b border-gray-800">
         <button onClick={onClick} className="w-full flex justify-between items-center text-left py-6 px-2 rounded-md transition-colors hover:bg-gray-800/30">
             <span className="text-lg font-medium text-white">{item.question}</span>
@@ -35,13 +16,16 @@ const FaqItem: React.FC<{ item: typeof faqData[0], isOpen: boolean, onClick: () 
 );
 
 export const Faq: React.FC = () => {
+    const { content } = useContext(CmsContext);
+    const { faq } = content;
+    
     const [openIndex, setOpenIndex] = useState<number | null>(0);
     const handleToggle = (index: number) => {
         setOpenIndex(openIndex === index ? null : index);
     };
 
     return (
-        <section className="py-20 px-4">
+        <section id="faq" className="py-20 px-4">
             <div className="container mx-auto grid lg:grid-cols-2 gap-12">
                 <div>
                     <AnimatedElement variant="left">
@@ -49,12 +33,12 @@ export const Faq: React.FC = () => {
                             FAQS
                         </div>
                     </AnimatedElement>
-                    <AnimatedElement delay={100} variant="left"><h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Your Questions Answered</h2></AnimatedElement>
-                    <AnimatedElement delay={200} variant="left"><p className="text-lg text-gray-400 mb-8">Need help? Find fast answers to common questions, from setup to strategy to automation success.</p></AnimatedElement>
+                    <AnimatedElement delay={100} variant="left"><h2 className="text-4xl md:text-5xl font-bold text-white mb-4">{faq.title}</h2></AnimatedElement>
+                    <AnimatedElement delay={200} variant="left"><p className="text-lg text-gray-400 mb-8">{faq.subtitle}</p></AnimatedElement>
                 </div>
                 <div>
-                    {faqData.map((item, index) => (
-                        <AnimatedElement key={index} delay={index * 100} variant="right">
+                    {faq.questions.map((item: any, index: number) => (
+                        <AnimatedElement key={item.id} delay={index * 100} variant="right">
                             <FaqItem
                                 item={item}
                                 isOpen={openIndex === index}
