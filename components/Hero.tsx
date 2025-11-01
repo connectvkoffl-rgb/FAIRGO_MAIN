@@ -72,7 +72,7 @@ export const Hero: React.FC<HeroProps> = ({ onBookCallClick }) => {
                 <div className="relative flex justify-center items-center mb-8 h-24 md:h-36">
                      <PulsingCircles />
                      <div className="relative h-full">
-                         <img src="../assets/Fairgo_croped.png" alt="FAIRGO Cropped Logo" className="relative h-full w-auto animate-pulse-glow-core" />
+                         <img src="https://i.ibb.co/XxtNxfHf/Fairgo-croped.png" alt="FAIRGO Cropped Logo" className="relative h-full w-auto animate-pulse-glow-core" />
                     </div>
                 </div>
             </AnimatedElement>
