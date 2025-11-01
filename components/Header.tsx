@@ -36,7 +36,7 @@ export const Header: React.FC = () => {
     <>
       <header className="sticky top-0 z-50 py-3 px-4 md:px-8 bg-[#01010c]/80 backdrop-blur-sm border-b border-gray-800/50">
         <div className="container mx-auto flex justify-between items-center">
-          <Logo className="h-10" scr="https://i.ibb.co/8gH1SvD6/Fairgo-logo.png"/>
+          <img className="h-10" src="https://i.ibb.co/8gH1SvD6/Fairgo-logo.png"/>
           <nav className="hidden md:flex items-center space-x-8">
             {navLinks.map((item) => (
               <a key={item} href={`#${item.toLowerCase().replace(/ /g, '-')}`} className="animated-underline text-gray-400 hover:text-white transition-colors duration-300">{item}</a>
