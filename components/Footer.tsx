@@ -17,7 +17,7 @@ export const Footer: React.FC<FooterProps> = ({ onBookCallClick }) => {
         <footer id="footer" className="py-20 px-4 border-t border-gray-800/50">
             <div className="container mx-auto text-center">
                 <AnimatedElement variant="scale">
-                    <Logo className="h-14 mx-auto mb-8" />
+                    <Logo className="h-14 mx-auto mb-8" src="https://i.ibb.co/8gH1SvD6/Fairgo-logo.png"/>
                 </AnimatedElement>
                 <AnimatedElement delay={200}>
                     <button 
